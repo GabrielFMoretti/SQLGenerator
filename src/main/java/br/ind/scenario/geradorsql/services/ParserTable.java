@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public record ParserTable(@NotNull GenerateRandomValue generateRandomValue,
                           @NotNull List<TableValue> tables) {
@@ -24,6 +25,7 @@ public record ParserTable(@NotNull GenerateRandomValue generateRandomValue,
     public Optional<TableValue> createValuesForTable(int numberRows, @NotNull Table table) {
         try {
             RowTable[] rows = generateRowsOfTable(numberRows, table);
+            changePrimaryKeysValues(rows);
             return Optional.of(new TableValue(table.table(), rows));
         } catch (GenerationValuesException e) {
             return Optional.empty();
@@ -48,9 +50,22 @@ public record ParserTable(@NotNull GenerateRandomValue generateRandomValue,
             else
                 value = generateRandomValue.generateValue(field);
 
-            FieldValue fieldValue = new FieldValue(field.nameField(), value, field.type());
+            FieldValue fieldValue = new FieldValue(field.nameField(), value, field.type(), field.unique());
             fieldValues.add(fieldValue);
         }
         return fieldValues.toArray(FieldValue[]::new);
+    }
+
+    private void changePrimaryKeysValues(RowTable[] rows) throws GenerationValuesException {
+        for (RowTable row : rows) {
+            List<FieldValue> fieldInRowUnique = row.getValues().stream().filter(FieldValue::isUnique).collect(Collectors.toList());
+            for (FieldValue fieldValue : fieldInRowUnique) {
+                int attempts = 0;
+                while (fieldInRowUnique.stream().anyMatch(fieldValueInList -> Objects.equals(fieldValue.getValue(), fieldValueInList.getValue())) && attempts < 3) {
+                    fieldValue.complementValue(generateRandomValue.generateRandomComplement());
+                    attempts++;
+                }
+            }
+        }
     }
 }

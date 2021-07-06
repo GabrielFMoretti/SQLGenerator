@@ -5,5 +5,8 @@ import org.jetbrains.annotations.Nullable;
 
 @JsonSerialize
 public record Field(String nameField, String faker, String type, FieldParams[] methodParams,
-                    @Nullable Relationship relationship) {
+                    @Nullable Relationship relationship, boolean unique) {
+    public Field(String nameField, String faker, String type, FieldParams[] methodParams, @Nullable Relationship relationship) {
+        this(nameField, faker, type, methodParams, relationship, false);
+    }
 }

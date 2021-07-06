@@ -66,6 +66,7 @@
       },
       {
         "nameField": "email",
+        "unique" : true,
         "faker": "emailAddress",
         "type": "STRING",
         "methodParams": []

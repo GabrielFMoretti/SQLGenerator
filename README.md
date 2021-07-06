@@ -6,12 +6,14 @@
   the `.json` file that describe the tables, like the sql create instruction. If this second parameter was never pass
   the program will always look to the root folder and search for a file named `tables.json` to consider the tables, if
   not found throws Exception.
-- After that the sql inserts will be print in console.
+- After that the sql inserts will be print in console and save in a file named
+  `result.sql` in the root folder.
 
 ## How create `tables.json` file
 
-The tables file describe the tables that you wanna to generate insert querys, so it looks like a instruction to create
-table. Here is a sample (all fields are mandatory):
+The tables file describe the tables that you wanna to generate insert querys,
+so it looks like a sql instruction to create table.
+Here is a sample (the fields `unique`and `relationship` are optionals) :
 
 ```
      [

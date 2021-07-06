@@ -4,13 +4,12 @@ import br.ind.scenario.geradorsql.models.table.FieldValue;
 import br.ind.scenario.geradorsql.models.table.RowTable;
 import br.ind.scenario.geradorsql.models.table.TableValue;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
 public class GenerateSQL {
 
-    public @Nullable String generateInsertsSQL(@NotNull TableValue tableValue) {
+    public @NotNull String generateInsertsSQL(@NotNull TableValue tableValue) {
         validateTableValueOrThrows(tableValue);
         return String.format("INSERT INTO %s (%s) VALUES %s;", tableValue.getName(), getAllFieldsNamesSeparator(tableValue), getValuesFromTable(tableValue));
     }

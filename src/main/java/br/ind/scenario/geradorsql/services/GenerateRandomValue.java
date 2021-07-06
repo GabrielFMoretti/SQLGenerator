@@ -25,6 +25,10 @@ public class GenerateRandomValue {
         mapFakers = Serializer.deserializer(pathMapFakers, MapFaker[].class).orElseThrow();
     }
 
+    public String generateRandomComplement() {
+        return String.valueOf(faker.number().randomNumber());
+    }
+
     public String generateValue(@NotNull Field field) throws GenerationValuesException {
         Optional<String> methodName = getMethodReferenceInConfiguration(field.faker());
         if (methodName.isEmpty()) throw new GenerationValuesException("Field haven't value to convert faker");
