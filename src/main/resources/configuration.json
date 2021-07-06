@@ -1,0 +1,66 @@
+[
+  {
+    "key": "name",
+    "value": [
+      "firstName",
+      "fullName"
+    ]
+  },
+  {
+    "key": "address",
+    "value": [
+      "streetAddress",
+      "city"
+    ]
+  },
+  {
+    "key": "internet",
+    "value": [
+      "emailAddress",
+      "macAddress"
+    ]
+  },
+  {
+    "key": "number",
+    "value": [
+      "numberBetween"
+    ]
+  },
+  {
+    "key": "crypto",
+    "value": [
+      "md5",
+      "sha256"
+    ]
+  },
+  {
+    "key": "commerce",
+    "value": [
+      "department"
+    ]
+  },
+  {
+    "key": "app",
+    "value": [
+      "version"
+    ]
+  },
+  {
+    "key": "bool",
+    "value": [
+      "bool"
+    ]
+  },
+  {
+    "key": "idNumber",
+    "value": [
+      "valid"
+    ]
+  },
+  {
+    "key": "space",
+    "value": [
+      "star"
+    ]
+  }
+]

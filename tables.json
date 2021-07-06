@@ -1,0 +1,100 @@
+[
+  {
+    "table": "instalacoes",
+    "fields": [
+      {
+        "nameField": "nome",
+        "faker": "firstName",
+        "type": "STRING",
+        "methodParams": []
+      },
+      {
+        "nameField": "mac",
+        "faker": "macAddress",
+        "type": "STRING",
+        "methodParams": []
+      },
+      {
+        "nameField": "endereco",
+        "faker": "streetAddress",
+        "type": "STRING",
+        "methodParams": []
+      },
+      {
+        "nameField": "cidade",
+        "faker": "city",
+        "type": "STRING",
+        "methodParams": []
+      },
+      {
+        "nameField": "versao",
+        "faker": "version",
+        "type": "STRING",
+        "methodParams": []
+      },
+      {
+        "nameField": "modelo_controladora",
+        "faker": "star",
+        "type": "STRING",
+        "methodParams": []
+      },
+      {
+        "nameField": "age",
+        "faker": "numberBetween",
+        "type": "INTEGER",
+        "methodParams": [
+          {
+            "className": "int",
+            "value": "1"
+          },
+          {
+            "className": "int",
+            "value": "60"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "table": "usuarios",
+    "fields": [
+      {
+        "nameField": "nome",
+        "faker": "firstName",
+        "type": "STRING",
+        "methodParams": []
+      },
+      {
+        "nameField": "email",
+        "faker": "emailAddress",
+        "type": "STRING",
+        "methodParams": []
+      }
+    ]
+  },
+  {
+    "table": "usuarios_instalacoes",
+    "fields": [
+      {
+        "nameField": "usuario_email",
+        "faker": "emailAddress",
+        "type": "STRING",
+        "methodParams": [],
+        "relationship": {
+          "table": "usuarios",
+          "field": "email"
+        }
+      },
+      {
+        "nameField": "instalacao_mac",
+        "faker": "macAddress",
+        "type": "STRING",
+        "methodParams": [],
+        "relationship": {
+          "table": "instalacoes",
+          "field": "mac"
+        }
+      }
+    ]
+  }
+]
