@@ -9,7 +9,9 @@ import br.ind.scenario.geradorsql.services.Serializer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,13 +26,21 @@ public class Main {
             path = Path.of(args[1]);
 
         Path pathConfiguration = Path.of(Objects.requireNonNull(Main.class.getResource("/configuration.json")).toURI());
+        Path resultPath = Path.of(System.getProperty("user.dir"), "result.sql");
+        Files.deleteIfExists(resultPath);
+        Files.createFile(resultPath);
         Serializer.deserializer(path, Table[].class).ifPresent(tables -> {
             List<TableValue> allTablesValues = new ArrayList<>();
             for (Table table : tables) {
                 try {
                     TableValue tableValue = new ParserTable(new GenerateRandomValue(pathConfiguration), allTablesValues).createValuesForTable(numberRows, table).orElseThrow();
                     allTablesValues.add(tableValue);
-                    System.out.println(new GenerateSQL().generateInsertsSQL(tableValue));
+                    String insertSQL = new GenerateSQL().generateInsertsSQL(tableValue);
+                    if (insertSQL == null) continue;
+                    insertSQL = insertSQL.replaceAll("VALUES ", "VALUES \n").replaceAll("\\),", "),\n");
+                    System.out.println(insertSQL);
+                    Files.writeString(resultPath, insertSQL, StandardOpenOption.APPEND);
+                    Files.writeString(resultPath, "\n", StandardOpenOption.APPEND);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

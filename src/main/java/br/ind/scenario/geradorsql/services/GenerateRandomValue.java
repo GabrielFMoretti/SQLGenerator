@@ -70,7 +70,7 @@ public class GenerateRandomValue {
                         .getValues().stream()
                         .filter(fieldValue -> Objects.equals(fieldValue.getName(), field.relationship().field()))
                         .findFirst().orElseThrow()
-                        .getValue().replaceAll("\"", "");
+                        .getValue().replaceAll("'", "");
             }
         }
         throw new IllegalArgumentException("Relationship not found!");

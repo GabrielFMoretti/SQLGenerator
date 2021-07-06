@@ -17,7 +17,8 @@
     "key": "internet",
     "value": [
       "emailAddress",
-      "macAddress"
+      "macAddress",
+      "url"
     ]
   },
   {
@@ -61,6 +62,18 @@
     "key": "space",
     "value": [
       "star"
+    ]
+  },
+  {
+    "key": "code",
+    "value": [
+      "ean13"
+    ]
+  },
+  {
+    "key": "company",
+    "value": [
+      "name"
     ]
   }
 ]
