@@ -63,7 +63,6 @@ Sample:
 
 ```
      [
-      \\ ... tables usuarios above
         {
             "table": "users_address",
             "fields": [
@@ -92,4 +91,5 @@ Sample:
             ]
         }
     ]
-    ```
+    
+  ```
