@@ -83,4 +83,36 @@ public class ParserTableTest {
             Assertions.assertTrue(foundAllFields);
         }
     }
+
+    @Test
+    public void mustParserTableWithRelationshipAutoID() throws IOException, URISyntaxException {
+        Table tableInstallation = new Table("installations", new Field[]{
+                new Field("name", "firstName", "string", new FieldParams[0], null),
+                new Field("address", "macAddress", "string", new FieldParams[0], null),
+        });
+        Table tableUser = new Table("users", new Field[]{
+                new Field("name", "firstName", "string", new FieldParams[0], null),
+                new Field("installation_id", "macAddress", "integer", new FieldParams[0], new Relationship("installations", true)),
+        });
+
+        Path pathConfiguration = Path.of(Objects.requireNonNull(this.getClass().getResource("/configuration.json")).toURI());
+        ParserTable parserTable = new ParserTable(new GenerateRandomValue(pathConfiguration), new ArrayList<>());
+
+        Optional<TableValue> optionalTableInstallation = parserTable.createValuesForTable(50, tableInstallation);
+        Assertions.assertTrue(optionalTableInstallation.isPresent());
+        parserTable.addTableValue(optionalTableInstallation.get());
+        Optional<TableValue> optionalTableUser = parserTable.createValuesForTable(50, tableUser);
+
+        Assertions.assertTrue(optionalTableUser.isPresent());
+
+        for (RowTable rowTable : optionalTableUser.get().getRows()) {
+            boolean foundAllFields = rowTable.getValues().stream().allMatch(fieldValue -> fieldValue.getName().equals("name") || fieldValue.getName().equals("installation_id"));
+            String valueRelation = rowTable.getValues().stream().filter(fieldValue -> fieldValue.getName().equals("installation_id")).findAny().orElseThrow().getValue();
+
+            int valueId = Integer.parseInt(valueRelation);
+            Assertions.assertTrue(valueId > 0 && valueId <= 50);
+
+            Assertions.assertTrue(foundAllFields);
+        }
+    }
 }

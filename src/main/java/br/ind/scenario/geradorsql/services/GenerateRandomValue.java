@@ -55,6 +55,11 @@ public class GenerateRandomValue {
 
     public String generateValueRelationship(@NotNull Field field, @NotNull List<TableValue> tables) {
         if (Objects.isNull(field.relationship())) throw new IllegalArgumentException("Relationship not exists!");
+        if (field.relationship().isAutoGenerateID()) {
+            for (TableValue table : tables)
+                if (Objects.equals(table.getName(), field.relationship().table()))
+                    return String.valueOf((new Random().nextInt(table.getRows().size()) + 1));
+        }
         for (TableValue table : tables) {
             if (Objects.equals(table.getName(), field.relationship().table())) {
                 Random random = new Random();

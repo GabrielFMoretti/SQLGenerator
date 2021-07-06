@@ -23,10 +23,8 @@ public class GenerateSQL {
             reason = "name is blank";
         if (tableValue.getRows().stream().findFirst().isPresent() && tableValue.getRows().stream().findFirst().get().getValues().isEmpty())
             reason = "has no values in fields";
-        if (!reason.isEmpty()) {
-            System.out.println(reason);
+        if (!reason.isEmpty())
             throw new IllegalArgumentException("Table receive is invalid. Reason: " + reason);
-        }
     }
 
     private String getAllFieldsNamesSeparator(@NotNull TableValue tableValue) {

@@ -62,13 +62,19 @@ public class GenerateRandomValueTest {
 
         List<TableValue> tableValues = new ArrayList<>();
         tableValues.add(new TableValue("installations", new RowTable[]{new RowTable(new FieldValue[]{new FieldValue("id", "33", "integer"),
-                new FieldValue("ids", "teste", "string")})}));
+                new FieldValue("ids", "teste", "string")}),
+                new RowTable(new FieldValue[]{new FieldValue("id", "12", "integer"),
+                        new FieldValue("ids", "teste2", "string")})}));
 
         String value = generateRandomValue.generateValueRelationship(
                 new Field("name", "firstName", "integer", new FieldParams[0], new Relationship("installations", "id")), tableValues);
 
+        String valueAutoID = generateRandomValue.generateValueRelationship(
+                new Field("id", "number", "integer", new FieldParams[0], new Relationship("installations", true)), tableValues);
+
         Assertions.assertNotNull(value);
         Assertions.assertFalse(value.isBlank());
-        Assertions.assertEquals("33", value);
+        Assertions.assertTrue(value.equals("12") || value.equals("33"));
+        Assertions.assertTrue(valueAutoID.equals("1") || valueAutoID.equals("2"));
     }
 }

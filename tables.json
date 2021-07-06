@@ -76,13 +76,13 @@
     "table": "usuarios_instalacoes",
     "fields": [
       {
-        "nameField": "usuario_email",
-        "faker": "emailAddress",
-        "type": "STRING",
+        "nameField": "usuario_id",
+        "faker": "number",
+        "type": "INTEGER",
         "methodParams": [],
         "relationship": {
           "table": "usuarios",
-          "field": "email"
+          "isAutoGenerateID": true
         }
       },
       {

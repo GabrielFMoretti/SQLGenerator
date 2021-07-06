@@ -20,7 +20,6 @@ public class GenerateSQLTest {
         GenerateSQL generateSQL = new GenerateSQL();
         String sql = generateSQL.generateInsertsSQL(tableValue);
         Assertions.assertTrue(Objects.nonNull(sql));
-        System.out.println(sql);
         Assertions.assertTrue(Objects.equals(SQL_INSERT_TEST, sql) || Objects.equals(SQL_INSERT_TEST_ALTERNATIVE, sql));
     }
 

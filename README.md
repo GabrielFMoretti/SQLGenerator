@@ -59,6 +59,9 @@ The program can generate random values from relationships too, all that must be 
 first the tables that don't have relationship and after the tables that have, like in sql, the tables without a
 relationship came first. After knowing that is only put the option field `relationship` in the object of table.
 
+The option of relation can be by one field of another table or considering an auto-
+increment id generation. In the sample we have both.
+
 Sample:
 
 ```
@@ -86,6 +89,27 @@ Sample:
                     "relationship": {
                           "table": "users",
                           "field": "email"
+                    }
+                }
+            ]
+        },
+        {
+            "table": "installations_relationship_sample",
+            "fields": [
+                {
+                    "nameField": "city",
+                    "faker": "city",
+                    "type": "STRING",
+                    "methodParams": []
+                },
+                {
+                    "nameField": "installtion_id",
+                    "faker": "number",
+                    "type": "INTEGER",
+                    "methodParams": [],
+                    "relationship": {
+                          "table": "installation",
+                          "isAutoGenerateID": true
                     }
                 }
             ]
