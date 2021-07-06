@@ -13,7 +13,7 @@
 The tables file describe the tables that you wanna to generate insert querys, so it looks like a instruction to create
 table. Here is a sample (all fields are mandatory):
 
-    ```
+```
      [
         {
             "table": "users",
@@ -48,7 +48,7 @@ table. Here is a sample (all fields are mandatory):
             ]
         }
     ]
-    ```
+```
 
 The `faker` field is what determine the random value that will be create. To know all the types of values that can be
 generate check de [configuration.json file](./src/main/resources/configuration.json).
@@ -92,4 +92,4 @@ Sample:
         }
     ]
     
-  ```
+```
